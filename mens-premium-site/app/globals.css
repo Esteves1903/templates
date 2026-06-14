@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-black text-brand-text antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  ::selection {
+    @apply bg-brand-gold text-brand-black;
+  }
+
+  ::-webkit-scrollbar        { width: 5px; }
+  ::-webkit-scrollbar-track  { @apply bg-brand-dark; }
+  ::-webkit-scrollbar-thumb  { @apply bg-brand-gold/50 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-brand-gold; }
+
+  /* Focus styles for keyboard navigation accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-gold ring-offset-2 ring-offset-brand-black;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #c9a84c 0%, #e4c97a 50%, #c9a84c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-padding {
+    @apply py-24 lg:py-32;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .clip-hero-diagonal {
+    clip-path: polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}

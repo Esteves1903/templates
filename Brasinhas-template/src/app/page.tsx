@@ -273,8 +273,11 @@ function MenuGallery() {
 // ----------------------------------------------------------------------
 // 3. Information & Contact (Glassmorphism & Magnet Hover)
 // ----------------------------------------------------------------------
+type InfoLine = { text: string; href?: string };
+type InfoCard = { icon: React.ElementType; title: string; lines: InfoLine[] };
+
 function InfoSection() {
-  const infoCards = [
+  const infoCards: InfoCard[] = [
     { icon: MapPin, title: "Localização", lines: [{text: "R. Fernão de Magalhães 89"}, {text: "4435-481 Venda Nova, Rio Tinto"}] },
     { icon: Clock, title: "Horário", lines: [{text: "Aberto todos os dias"}, {text: "Encerra às 22:30 (Popular aos Domingos)"}] },
     { icon: Phone, title: "Contacto", lines: [{text: "916 233 375", href: "tel:+351916233375"}, {text: "reservas@obrasinhas.pt", href: "mailto:reservas@obrasinhas.pt"}] },

@@ -5,11 +5,8 @@ const config: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
-  },
-  experimental: {
-    // React 19 + Next.js 15 — sem necessidade de peerDependencyCheck
-    reactCompiler: false,
   },
 }
 

@@ -13,13 +13,6 @@ export function FireBackground({ className }: FireBackgroundProps) {
   const mouseRef = useRef({ x: 0.5, y: 0.8 });
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const intensity = maxScroll > 0 ? scrollY / maxScroll : 0;
-      scrollIntensityRef.current = Math.min(intensity, 1);
-    };
-
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = {
         x: e.clientX / window.innerWidth,
@@ -27,11 +20,8 @@ export function FireBackground({ className }: FireBackgroundProps) {
       };
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    handleScroll();
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
@@ -69,20 +59,18 @@ export function FireBackground({ className }: FireBackgroundProps) {
       wobbleSpeed: number;
 
       constructor(spawnX?: number, spawnY?: number) {
-        const intensity = 1 + scrollIntensityRef.current * 1.8;
         const mx = mouseRef.current.x;
 
-        // Spawn across bottom, slightly biased toward mouse X
-        this.x = spawnX ?? (Math.random() * canvas!.width * 0.6 + canvas!.width * 0.2 + (mx - 0.5) * 150);
-        this.y = spawnY ?? canvas!.height + Math.random() * 30;
-        this.size = Math.random() * 28 * intensity + 8;
-        this.speedY = -(Math.random() * 3.5 + 1.5) * intensity;
-        this.speedX = (Math.random() - 0.5) * 2;
-        this.maxLife = Math.random() * 90 + 50;
+        this.x = spawnX ?? (Math.random() * canvas!.width * 0.6 + canvas!.width * 0.2 + (mx - 0.5) * 80);
+        this.y = spawnY ?? canvas!.height + Math.random() * 10;
+        this.size = Math.random() * 28 + 10;
+        this.speedY = -(Math.random() * 3.0 + 1.2);
+        this.speedX = (Math.random() - 0.5) * 1.6;
+        this.maxLife = Math.random() * 100 + 60;
         this.life = this.maxLife;
-        this.hue = Math.random() * 30; // 0–30: deep red to orange
+        this.hue = Math.random() * 30;
         this.wobble = Math.random() * Math.PI * 2;
-        this.wobbleSpeed = (Math.random() * 0.04 + 0.02);
+        this.wobbleSpeed = (Math.random() * 0.03 + 0.01);
       }
 
       update() {
@@ -108,7 +96,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         gradient.addColorStop(1, `hsla(${this.hue + 15}, 80%, 20%, 0)`);
 
         ctx.fillStyle = gradient;
-        ctx.globalAlpha = Math.max(0, progress * 0.85);
+        ctx.globalAlpha = Math.max(0, progress * 0.28);
         ctx.fill();
       }
     }
@@ -126,16 +114,15 @@ export function FireBackground({ className }: FireBackgroundProps) {
       twinkleSpeed: number;
 
       constructor() {
-        const intensity = 1 + scrollIntensityRef.current * 1.5;
         this.x = Math.random() * canvas!.width * 0.8 + canvas!.width * 0.1;
-        this.y = canvas!.height - Math.random() * canvas!.height * 0.3;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedY = -(Math.random() * 2.5 + 0.5) * intensity;
-        this.speedX = (Math.random() - 0.5) * 1.5;
-        this.maxLife = Math.random() * 180 + 60;
+        this.y = canvas!.height - Math.random() * canvas!.height * 0.15;
+        this.size = Math.random() * 1.2 + 0.3;
+        this.speedY = -(Math.random() * 1.2 + 0.3);
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.maxLife = Math.random() * 120 + 40;
         this.life = this.maxLife;
         this.twinkle = Math.random() * Math.PI * 2;
-        this.twinkleSpeed = Math.random() * 0.12 + 0.04;
+        this.twinkleSpeed = Math.random() * 0.08 + 0.02;
       }
 
       update() {
@@ -161,7 +148,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         grd.addColorStop(1, 'rgba(200, 50, 0, 0)');
 
         ctx.fillStyle = grd;
-        ctx.globalAlpha = Math.max(0, progress * twinkleFactor * 0.95);
+        ctx.globalAlpha = Math.max(0, progress * twinkleFactor * 0.3);
         ctx.fill();
       }
     }
@@ -202,7 +189,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x - this.vx * this.length * 0.5, this.y - this.vy * this.length * 0.5);
-        ctx.strokeStyle = `rgba(255, 200, 50, ${progress * 0.9})`;
+        ctx.strokeStyle = `rgba(255, 200, 50, ${progress * 0.25})`;
         ctx.lineWidth = progress * 2;
         ctx.lineCap = 'round';
         ctx.globalAlpha = progress;
@@ -211,24 +198,18 @@ export function FireBackground({ className }: FireBackgroundProps) {
     }
 
     const createParticles = () => {
-      const intensity = scrollIntensityRef.current;
-
-      // Fire particles
-      const fireAmount = Math.floor(3 + intensity * 8);
-      for (let i = 0; i < fireAmount; i++) {
+      for (let i = 0; i < 3; i++) {
         particles.push(new FireParticle());
       }
 
-      // Embers
-      if (Math.random() < 0.35 + intensity * 0.4) {
+      if (Math.random() < 0.35) {
         particles.push(new EmberParticle());
       }
 
-      // Sparks (occasional bursts)
-      if (Math.random() < 0.04 + intensity * 0.08) {
+      if (Math.random() < 0.02) {
         const burstX = Math.random() * canvas!.width * 0.6 + canvas!.width * 0.2;
-        const burstY = canvas!.height - Math.random() * canvas!.height * 0.15;
-        for (let i = 0; i < Math.floor(Math.random() * 5 + 3); i++) {
+        const burstY = canvas!.height - Math.random() * canvas!.height * 0.1;
+        for (let i = 0; i < 3; i++) {
           const sp = new SparkParticle();
           sp.x = burstX;
           sp.y = burstY;
@@ -241,9 +222,9 @@ export function FireBackground({ className }: FireBackgroundProps) {
       // Subtle glow at bottom center
       const cx = canvas.width * 0.5;
       const cy = canvas.height;
-      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.height * 0.5);
-      grd.addColorStop(0, `rgba(249, 115, 22, ${0.06 + scrollIntensityRef.current * 0.06})`);
-      grd.addColorStop(0.4, `rgba(200, 50, 0, ${0.03 + scrollIntensityRef.current * 0.03})`);
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.height * 0.4);
+      grd.addColorStop(0, 'rgba(249, 115, 22, 0.14)');
+      grd.addColorStop(0.4, 'rgba(200, 50, 0, 0.07)');
       grd.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 1;
@@ -256,7 +237,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
 
       // Trail effect
       ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = 0.28;
+      ctx.globalAlpha = 0.22;
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -298,11 +279,9 @@ export function FireBackground({ className }: FireBackgroundProps) {
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
       />
-      {/* Layered overlays for depth and moodiness */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-stone-950/70 to-stone-950/90" />
-      {/* Subtle vignette */}
+      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-stone-950/88 to-stone-950/96" />
       <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)'
+        background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)'
       }} />
     </div>
   );

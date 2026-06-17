@@ -8,7 +8,7 @@ import { CalendarDays, Clock, Users, User, Phone, Mail, MessageSquare, CheckCirc
 
 const timeSlots = [
   "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
-  "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00",
+  "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30",
 ];
 
 const partySizes = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -276,7 +276,7 @@ export default function ReservarPage() {
                         ))}
                       </div>
                       <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold pt-1">Jantar</p>
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-4 gap-2">
                         {timeSlots.filter((t) => parseInt(t) >= 16).map((t) => (
                           <button
                             key={t}

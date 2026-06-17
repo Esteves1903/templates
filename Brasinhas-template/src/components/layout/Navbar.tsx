@@ -10,7 +10,7 @@ const navItems = [
   { name: 'A Nossa História', href: '/#sobre-nos' },
   { name: 'A Nossa Carne', href: '/#carne' },
   { name: 'O Restaurante', href: '/#restaurante' },
-  { name: 'Reservar', href: '/reservar' },
+  { name: 'Ementa', href: '/ementa' },
 ];
 
 export function Navbar() {

@@ -96,7 +96,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         gradient.addColorStop(1, `hsla(${this.hue + 15}, 80%, 20%, 0)`);
 
         ctx.fillStyle = gradient;
-        ctx.globalAlpha = Math.max(0, progress * 0.28);
+        ctx.globalAlpha = Math.max(0, progress * 0.20);
         ctx.fill();
       }
     }
@@ -148,7 +148,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         grd.addColorStop(1, 'rgba(200, 50, 0, 0)');
 
         ctx.fillStyle = grd;
-        ctx.globalAlpha = Math.max(0, progress * twinkleFactor * 0.3);
+        ctx.globalAlpha = Math.max(0, progress * twinkleFactor * 0.22);
         ctx.fill();
       }
     }
@@ -189,7 +189,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x - this.vx * this.length * 0.5, this.y - this.vy * this.length * 0.5);
-        ctx.strokeStyle = `rgba(255, 200, 50, ${progress * 0.25})`;
+        ctx.strokeStyle = `rgba(255, 200, 50, ${progress * 0.18})`;
         ctx.lineWidth = progress * 2;
         ctx.lineCap = 'round';
         ctx.globalAlpha = progress;
@@ -223,8 +223,8 @@ export function FireBackground({ className }: FireBackgroundProps) {
       const cx = canvas.width * 0.5;
       const cy = canvas.height;
       const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.height * 0.4);
-      grd.addColorStop(0, 'rgba(249, 115, 22, 0.14)');
-      grd.addColorStop(0.4, 'rgba(200, 50, 0, 0.07)');
+      grd.addColorStop(0, 'rgba(249, 115, 22, 0.10)');
+      grd.addColorStop(0.4, 'rgba(200, 50, 0, 0.05)');
       grd.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 1;
@@ -237,7 +237,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
 
       // Trail effect
       ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = 0.22;
+      ctx.globalAlpha = 0.28;
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -279,7 +279,7 @@ export function FireBackground({ className }: FireBackgroundProps) {
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-stone-950/88 to-stone-950/96" />
+      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/68 via-stone-950/90 to-stone-950/97" />
       <div className="absolute inset-0" style={{
         background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)'
       }} />

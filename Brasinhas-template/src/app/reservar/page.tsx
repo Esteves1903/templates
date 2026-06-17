@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { CalendarDays, Clock, Users, User, Phone, Mail, MessageSquare, CheckCircle, Flame } from "lucide-react";
+import { CalendarDays, Clock, Users, User, Phone, Mail, MessageSquare, CheckCircle, Flame, ChevronDown } from "lucide-react";
 
 const timeSlots = [
   "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
@@ -115,6 +115,18 @@ export default function ReservarPage() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [horaOpen, setHoraOpen] = useState(false);
+  const horaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (horaRef.current && !horaRef.current.contains(e.target as Node)) {
+        setHoraOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
 
   const set = (key: keyof FormState) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -253,45 +265,62 @@ export default function ReservarPage() {
                     onChange={set("data")}
                     required
                   />
-                  <div className="space-y-2">
+                  <div className="space-y-2" ref={horaRef}>
                     <label className="block text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">
                       Hora
                     </label>
-                    <div className="space-y-3">
-                      <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold">Almoço</p>
-                      <div className="grid grid-cols-3 gap-2">
-                        {timeSlots.filter((t) => parseInt(t) < 16).map((t) => (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => set("hora")(t)}
-                            className={`py-2.5 rounded-xl border text-xs font-semibold transition-all ${
-                              form.hora === t
-                                ? "border-brand-500 text-brand-500 bg-brand-500/10"
-                                : "border-white/[0.08] text-white/50 hover:border-brand-500/50 hover:text-white/80 bg-white/[0.03]"
-                            }`}
-                          >
-                            {t}
-                          </button>
-                        ))}
-                      </div>
-                      <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold pt-1">Jantar</p>
-                      <div className="grid grid-cols-4 gap-2">
-                        {timeSlots.filter((t) => parseInt(t) >= 16).map((t) => (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => set("hora")(t)}
-                            className={`py-2.5 rounded-xl border text-xs font-semibold transition-all ${
-                              form.hora === t
-                                ? "border-brand-500 text-brand-500 bg-brand-500/10"
-                                : "border-white/[0.08] text-white/50 hover:border-brand-500/50 hover:text-white/80 bg-white/[0.03]"
-                            }`}
-                          >
-                            {t}
-                          </button>
-                        ))}
-                      </div>
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() => setHoraOpen((v) => !v)}
+                        className={`w-full bg-white/[0.03] border rounded-2xl pl-11 pr-10 py-4 text-left text-sm font-sans focus:outline-none transition-all cursor-pointer ${
+                          horaOpen ? "border-brand-500/60 bg-white/[0.05]" : "border-white/[0.08]"
+                        }`}
+                      >
+                        <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+                        <span className={form.hora ? "text-white" : "text-white/20"}>
+                          {form.hora || "Selecionar hora"}
+                        </span>
+                        <ChevronDown className={`absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 transition-transform duration-200 ${horaOpen ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {horaOpen && (
+                        <div className="absolute inset-x-0 top-[calc(100%+0.5rem)] bg-stone-900 border border-white/[0.08] rounded-2xl z-50 shadow-2xl overflow-hidden">
+                          <div className="max-h-60 overflow-y-auto p-2">
+                            <p className="text-[9px] text-white/30 uppercase tracking-[0.3em] font-bold px-3 pt-2 pb-1">Almoço</p>
+                            {timeSlots.filter((t) => parseInt(t) < 16).map((t) => (
+                              <button
+                                key={t}
+                                type="button"
+                                onClick={() => { set("hora")(t); setHoraOpen(false); }}
+                                className={`w-full text-left px-3 py-2.5 text-sm rounded-xl transition-colors ${
+                                  form.hora === t
+                                    ? "bg-brand-500/20 text-brand-400 font-medium"
+                                    : "text-white/70 hover:bg-white/[0.05] hover:text-white"
+                                }`}
+                              >
+                                {t}
+                              </button>
+                            ))}
+                            <div className="my-1 h-px bg-white/[0.06] mx-3" />
+                            <p className="text-[9px] text-white/30 uppercase tracking-[0.3em] font-bold px-3 pt-2 pb-1">Jantar</p>
+                            {timeSlots.filter((t) => parseInt(t) >= 16).map((t) => (
+                              <button
+                                key={t}
+                                type="button"
+                                onClick={() => { set("hora")(t); setHoraOpen(false); }}
+                                className={`w-full text-left px-3 py-2.5 text-sm rounded-xl transition-colors ${
+                                  form.hora === t
+                                    ? "bg-brand-500/20 text-brand-400 font-medium"
+                                    : "text-white/70 hover:bg-white/[0.05] hover:text-white"
+                                }`}
+                              >
+                                {t}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

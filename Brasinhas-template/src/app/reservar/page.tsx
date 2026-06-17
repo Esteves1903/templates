@@ -253,26 +253,47 @@ export default function ReservarPage() {
                     onChange={set("data")}
                     required
                   />
-                  <SelectField
-                    label="Hora"
-                    icon={Clock}
-                    id="hora"
-                    value={form.hora}
-                    onChange={set("hora")}
-                    required
-                  >
-                    <option value="" disabled>Selecionar hora</option>
-                    <optgroup label="Almoço">
-                      {timeSlots.filter((t) => parseInt(t) < 16).map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Jantar">
-                      {timeSlots.filter((t) => parseInt(t) >= 16).map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </optgroup>
-                  </SelectField>
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">
+                      Hora
+                    </label>
+                    <div className="space-y-3">
+                      <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold">Almoço</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {timeSlots.filter((t) => parseInt(t) < 16).map((t) => (
+                          <button
+                            key={t}
+                            type="button"
+                            onClick={() => set("hora")(t)}
+                            className={`py-2.5 rounded-xl border text-xs font-semibold transition-all ${
+                              form.hora === t
+                                ? "border-brand-500 text-brand-500 bg-brand-500/10"
+                                : "border-white/[0.08] text-white/50 hover:border-brand-500/50 hover:text-white/80 bg-white/[0.03]"
+                            }`}
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                      <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold pt-1">Jantar</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {timeSlots.filter((t) => parseInt(t) >= 16).map((t) => (
+                          <button
+                            key={t}
+                            type="button"
+                            onClick={() => set("hora")(t)}
+                            className={`py-2.5 rounded-xl border text-xs font-semibold transition-all ${
+                              form.hora === t
+                                ? "border-brand-500 text-brand-500 bg-brand-500/10"
+                                : "border-white/[0.08] text-white/50 hover:border-brand-500/50 hover:text-white/80 bg-white/[0.03]"
+                            }`}
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Party size */}

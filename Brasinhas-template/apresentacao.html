@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apresentação de Template — Website para Restaurante</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #ea580c;
+    --orange-light: #f97316;
+    --dark: #0c0a09;
+    --dark-2: #1c1917;
+    --dark-3: #292524;
+    --white: #fafaf9;
+    --muted: rgba(250,250,249,0.45);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #e5e5e5;
+    color: var(--white);
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 12mm;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  /* ── ACCENTS ── */
+  .accent-line {
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: var(--orange);
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid rgba(234,88,12,0.4);
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  /* ══════════════════════════════════════════
+     PAGE 1 — CAPA
+  ══════════════════════════════════════════ */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  .cover-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(234,88,12,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(234,88,12,0.10) 0%, transparent 50%),
+      linear-gradient(160deg, #1a0f08 0%, #0c0a09 50%, #0f0b09 100%);
+  }
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .cover-content {
+    position: relative;
+    z-index: 2;
+    padding: 14mm 14mm 12mm;
+  }
+  .cover-eyebrow {
+    margin-bottom: 7mm;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--white);
+    margin-bottom: 6mm;
+  }
+  .cover-title em {
+    font-style: italic;
+    color: var(--orange-light);
+  }
+  .cover-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 105mm;
+    margin-bottom: 10mm;
+  }
+  .cover-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin-bottom: 7mm;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-meta-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(250,250,249,0.3);
+  }
+  .cover-meta-value {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(250,250,249,0.6);
+    margin-top: 2px;
+  }
+
+  /* decorative number */
+  .cover-number {
+    position: absolute;
+    top: 12mm;
+    right: 14mm;
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    font-weight: 700;
+    color: rgba(234,88,12,0.06);
+    line-height: 1;
+    user-select: none;
+    z-index: 1;
+  }
+
+  /* ══════════════════════════════════════════
+     SHARED INNER PAGE LAYOUT
+  ══════════════════════════════════════════ */
+  .inner {
+    padding: 12mm 14mm;
+    display: flex;
+    flex-direction: column;
+    gap: 8mm;
+  }
+  .page-header {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 5mm;
+    margin-bottom: 2mm;
+  }
+  .page-header .tag { margin-bottom: 3mm; display: block; }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .page-title em { font-style: italic; color: var(--orange-light); }
+
+  .page-footer {
+    position: absolute;
+    bottom: 8mm;
+    left: 14mm;
+    right: 14mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 4mm;
+  }
+  .page-footer-brand {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(250,250,249,0.25);
+  }
+  .page-footer-num {
+    font-size: 9px;
+    color: rgba(250,250,249,0.2);
+  }
+
+  /* ══════════════════════════════════════════
+     CARDS / BLOCKS
+  ══════════════════════════════════════════ */
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 6mm 7mm;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2mm;
+  }
+  .card-body {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+
+  /* feature list */
+  .feat-list { list-style: none; display: flex; flex-direction: column; gap: 3mm; }
+  .feat-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 3mm;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .feat-list li::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .feat-list li strong { color: var(--white); font-weight: 500; }
+
+  /* page mockup */
+  .mockup {
+    background: var(--dark-2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .mockup-bar {
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 3mm 4mm;
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+  .mockup-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+  .mockup-body {
+    padding: 4mm;
+  }
+  .mockup-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 6px;
+    margin-bottom: 2mm;
+    padding: 3mm 4mm;
+    font-size: 9px;
+    color: rgba(250,250,249,0.3);
+    letter-spacing: 0.1em;
+  }
+  .mockup-section.hero {
+    height: 18mm;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5mm;
+    background: linear-gradient(135deg, rgba(234,88,12,0.08) 0%, transparent 70%);
+  }
+  .mockup-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: rgba(250,250,249,0.7);
+  }
+  .mockup-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5mm; }
+  .mockup-item {
+    height: 10mm;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .mockup-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2mm 5mm;
+    border-radius: 999px;
+  }
+
+  /* step */
+  .steps { display: flex; flex-direction: column; gap: 4mm; }
+  .step {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 8mm;
+    height: 8mm;
+    border-radius: 50%;
+    background: rgba(234,88,12,0.15);
+    border: 1px solid rgba(234,88,12,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: var(--orange);
+    font-weight: 700;
+  }
+  .step-content {}
+  .step-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1mm;
+  }
+  .step-desc {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* highlight box */
+  .highlight {
+    background: linear-gradient(135deg, rgba(234,88,12,0.1) 0%, rgba(234,88,12,0.04) 100%);
+    border: 1px solid rgba(234,88,12,0.25);
+    border-radius: 10px;
+    padding: 5mm 6mm;
+  }
+  .highlight-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 2mm;
+  }
+  .highlight-body {
+    font-size: 10.5px;
+    font-weight: 300;
+    color: rgba(250,250,249,0.6);
+    line-height: 1.7;
+  }
+
+  /* stat */
+  .stats { display: flex; gap: 0; }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 4mm;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    display: block;
+    margin-bottom: 1mm;
+  }
+  .stat-label {
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250,250,249,0.3);
+  }
+
+  /* checklist */
+  .checklist { display: flex; flex-direction: column; gap: 2.5mm; }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+  }
+  .check-icon {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: rgba(234,88,12,0.15);
+    border: 1px solid rgba(234,88,12,0.4);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px;
+    color: var(--orange);
+  }
+
+  /* ══════════════════════════════════════════
+     PRINT
+  ══════════════════════════════════════════ */
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════
+     PÁGINA 1 — CAPA
+══════════════════════════ -->
+<div class="page cover">
+  <div class="cover-bg"></div>
+  <div class="cover-grid"></div>
+  <div class="cover-number">R</div>
+
+  <div class="cover-content">
+    <div class="cover-eyebrow">
+      <span class="badge">Proposta Comercial</span>
+    </div>
+    <h1 class="cover-title">
+      Website Profissional<br>para o Seu<br><em>Restaurante</em>
+    </h1>
+    <p class="cover-sub">
+      Uma presença digital moderna, rápida e pensada para converter visitantes em clientes — com páginas de ementa, reservas online e identidade visual adaptada ao seu negócio.
+    </p>
+    <div class="cover-divider"></div>
+    <div class="cover-meta">
+      <div>
+        <div class="cover-meta-label">Preparado por</div>
+        <div class="cover-meta-value">Elaris Studio</div>
+      </div>
+      <div>
+        <div class="cover-meta-label">Versão</div>
+        <div class="cover-meta-value">Template v1.0</div>
+      </div>
+      <div>
+        <div class="cover-meta-label">Data</div>
+        <div class="cover-meta-value">Junho 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     PÁGINA 2 — O QUE INCLUI
+══════════════════════════ -->
+<div class="page">
+  <div class="inner">
+    <div class="page-header">
+      <span class="tag">Visão Geral</span>
+      <h2 class="page-title">O que está <em>incluído</em></h2>
+    </div>
+
+    <p style="font-size:11.5px; font-weight:300; color:var(--muted); line-height:1.75; max-width:150mm;">
+      Esta template foi desenvolvida de raiz para restaurantes que querem uma presença digital que reflita a qualidade do seu espaço — sem parecer genérica, sem comprometer a velocidade e sem exigir conhecimentos técnicos para gerir.
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-size:18px; margin-bottom:2mm;">🏠</div>
+        <div class="card-title">Página Inicial</div>
+        <div class="card-body">Hero com slogan, secção sobre nós, diferenciadoes, destaques da ementa, fotografia do espaço e call-to-action de reserva.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:18px; margin-bottom:2mm;">📋</div>
+        <div class="card-title">Ementa Completa</div>
+        <div class="card-body">Página com categorias filtráveis por separadores, grelha de pratos com imagem, descrição e preço, e CTA de reserva no final.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:18px; margin-bottom:2mm;">📅</div>
+        <div class="card-title">Reservas Online</div>
+        <div class="card-body">Formulário completo com nome, telefone, e-mail, data, seletor de hora personalizado, número de pessoas e pedido especial.</div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color: rgba(234,88,12,0.2);">
+      <div class="card-title" style="margin-bottom:3mm;">O que torna este website diferente</div>
+      <ul class="feat-list">
+        <li><strong>Design exclusivo com tema escuro</strong> — fundo em pedra escura com acentos laranja, fogo animado em canvas, tipografia elegante.</li>
+        <li><strong>100% responsivo</strong> — funciona em telemóvel, tablet e computador sem qualquer adaptação adicional.</li>
+        <li><strong>Animações profissionais</strong> — transições suaves, elementos que aparecem ao fazer scroll, botões com micro-interações.</li>
+        <li><strong>Dropdown de hora personalizado</strong> — sem pop-ups nativos que ficam em branco no telemóvel. Opções visíveis sempre.</li>
+        <li><strong>Construído com Next.js 15</strong> — carregamento ultra-rápido, otimizado para SEO e pronto para produção.</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Elaris Studio — Template de Restaurante</span>
+    <span class="page-footer-num">2 / 6</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     PÁGINA 3 — PÁGINAS EM DETALHE
+══════════════════════════ -->
+<div class="page">
+  <div class="inner">
+    <div class="page-header">
+      <span class="tag">Estrutura do Website</span>
+      <h2 class="page-title">As <em>três páginas</em> em detalhe</h2>
+    </div>
+
+    <div style="display:flex; gap:4mm;">
+      <!-- mockup home -->
+      <div style="flex:1;">
+        <div style="font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:2mm;">Página Inicial</div>
+        <div class="mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ff5f57;"></div>
+            <div class="mockup-dot" style="background:#febc2e;"></div>
+            <div class="mockup-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-section hero">
+              <div class="mockup-hero-title">Slogan do Restaurante</div>
+              <div class="mockup-btn">Reservar Mesa</div>
+            </div>
+            <div class="mockup-section" style="height:6mm; display:flex; align-items:center;">Sobre Nós + História</div>
+            <div class="mockup-section" style="height:5mm; display:flex; align-items:center;">3 Diferenciadoes</div>
+            <div class="mockup-grid">
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+            </div>
+            <div style="font-size:7px; color:rgba(250,250,249,0.2); margin-top:1.5mm; text-align:center; letter-spacing:0.15em;">DESTAQUES DA EMENTA</div>
+            <div class="mockup-section" style="height:6mm; display:flex; align-items:center; margin-top:1.5mm;">Fotografia do Espaço</div>
+            <div class="mockup-section" style="height:7mm; display:flex; align-items:center; justify-content:center; background:rgba(234,88,12,0.07);">CTA Reservar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- mockup ementa -->
+      <div style="flex:1;">
+        <div style="font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:2mm;">Ementa</div>
+        <div class="mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ff5f57;"></div>
+            <div class="mockup-dot" style="background:#febc2e;"></div>
+            <div class="mockup-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-section hero" style="height:14mm;">
+              <div style="font-size:7px; color:var(--orange); letter-spacing:0.2em;">TIPO · LOCAL</div>
+              <div class="mockup-hero-title">A Nossa <em style="color:var(--orange-light);">Ementa</em></div>
+            </div>
+            <div style="display:flex; gap:1.5mm; margin-bottom:2mm; margin-top:2mm;">
+              <div style="background:var(--orange); border-radius:999px; padding:1mm 3mm; font-size:7px; color:white;">Cat. 1</div>
+              <div style="border:1px solid rgba(255,255,255,0.12); border-radius:999px; padding:1mm 3mm; font-size:7px; color:rgba(250,250,249,0.4);">Cat. 2</div>
+              <div style="border:1px solid rgba(255,255,255,0.12); border-radius:999px; padding:1mm 3mm; font-size:7px; color:rgba(250,250,249,0.4);">Cat. 3</div>
+            </div>
+            <div class="mockup-grid">
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+              <div class="mockup-item"></div>
+            </div>
+            <div class="mockup-section" style="height:7mm; display:flex; align-items:center; justify-content:center; background:rgba(234,88,12,0.07); margin-top:2mm;">CTA Reservar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- mockup reservar -->
+      <div style="flex:1;">
+        <div style="font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:2mm;">Reservas</div>
+        <div class="mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ff5f57;"></div>
+            <div class="mockup-dot" style="background:#febc2e;"></div>
+            <div class="mockup-dot" style="background:#28c840;"></div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-section" style="height:5mm; display:flex; align-items:center; justify-content:center; font-size:10px; font-family:'Playfair Display',serif; color:rgba(250,250,249,0.6);">Reserve a Sua Mesa</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5mm; margin-bottom:1.5mm; margin-top:2mm;">
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:6px; height:7mm;"></div>
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:6px; height:7mm;"></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:6px; height:7mm; margin-bottom:1.5mm;"></div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5mm; margin-bottom:1.5mm;">
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:6px; height:7mm;"></div>
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:6px; height:7mm;"></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:6px; height:10mm; margin-bottom:3mm;"></div>
+            <div style="background:var(--orange); border-radius:999px; height:7mm; display:flex; align-items:center; justify-content:center; font-size:7px; color:white; font-weight:600; letter-spacing:0.2em;">CONFIRMAR RESERVA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <div class="highlight-title">Navegação consistente em todas as páginas</div>
+      <div class="highlight-body">O cabeçalho fixo com efeito de blur ao fazer scroll, o logótipo clicável e o botão "Reservar" laranja estão sempre presentes. O menu mobile abre em painel lateral com animação fluida. O rodapé inclui morada, horário, redes sociais e contactos.</div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Elaris Studio — Template de Restaurante</span>
+    <span class="page-footer-num">3 / 6</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     PÁGINA 4 — PERSONALIZAÇÃO
+══════════════════════════ -->
+<div class="page">
+  <div class="inner">
+    <div class="page-header">
+      <span class="tag">Adaptação ao Cliente</span>
+      <h2 class="page-title">Como <em>personalizamos</em> para si</h2>
+    </div>
+
+    <p style="font-size:11.5px; font-weight:300; color:var(--muted); line-height:1.75;">
+      A template está estruturada para ser adaptada rapidamente. Cada texto, imagem, cor e dado de contacto tem um lugar claro e definido — sem código complexo, sem redesenhar do zero.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Identidade Visual</div>
+          <div class="step-desc">Substituímos o logótipo, definimos a cor principal (atualmente laranja — pode ser qualquer cor da marca do cliente) e aplicamos a tipografia escolhida. O tema escuro mantém-se como base, podendo ser adaptado para claro se pretendido.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Conteúdo Textual</div>
+          <div class="step-desc">Slogan, história, descrição do espaço, diferenciadoes e todos os textos da home são substituídos pelo conteúdo real do restaurante. O cliente fornece o texto ou nós redigimos com base numa entrevista.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Ementa Real</div>
+          <div class="step-desc">Inserimos os pratos reais com nomes, descrições, preços e fotografias fornecidas pelo cliente. As categorias (tabs) são totalmente configuráveis — podem ser adicionadas, removidas ou renomeadas.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Imagens e Fotografia</div>
+          <div class="step-desc">As imagens de stock são substituídas por fotografias reais do espaço, pratos e equipa. Recomendamos entre 8 a 12 fotografias de alta qualidade para preencher todas as secções.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Contactos e Ligações</div>
+          <div class="step-desc">Número de telefone, endereço, horários de funcionamento, links para redes sociais e e-mail de contacto são configurados e testados. O botão "Ligar Agora" liga diretamente ao número do restaurante.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Elaris Studio — Template de Restaurante</span>
+    <span class="page-footer-num">4 / 6</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     PÁGINA 5 — TÉCNICO & SEO
+══════════════════════════ -->
+<div class="page">
+  <div class="inner">
+    <div class="page-header">
+      <span class="tag">Tecnologia & Performance</span>
+      <h2 class="page-title">Rápido, seguro e <em>encontrável</em></h2>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:2mm;">
+      <div>
+        <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:3mm;">Stack Tecnológico</div>
+        <ul class="feat-list">
+          <li><strong>Next.js 15</strong> — framework React de referência para websites de produção.</li>
+          <li><strong>TypeScript</strong> — código robusto, sem erros silenciosos.</li>
+          <li><strong>Tailwind CSS</strong> — design consistente e manutenção simples.</li>
+          <li><strong>Framer Motion</strong> — animações fluidas e profissionais.</li>
+          <li><strong>Vercel</strong> — alojamento global, CDN automático, HTTPS incluído.</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:3mm;">SEO & Visibilidade</div>
+        <ul class="feat-list">
+          <li><strong>Meta tags completas</strong> — título, descrição e Open Graph por página.</li>
+          <li><strong>Sitemap automático</strong> — gerado pelo Next.js para indexação Google.</li>
+          <li><strong>Imagens otimizadas</strong> — compressão automática e lazy loading.</li>
+          <li><strong>URL amigáveis</strong> — /ementa, /reservar — fáceis de memorizar e indexar.</li>
+          <li><strong>Acessibilidade</strong> — estrutura semântica, contraste adequado, labels corretos.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="background:rgba(234,88,12,0.05); border-color:rgba(234,88,12,0.15);">
+      <div class="card-title" style="margin-bottom:3mm;">Performance esperada</div>
+      <div class="stats" style="border:1px solid rgba(255,255,255,0.06); border-radius:8px; overflow:hidden;">
+        <div class="stat">
+          <span class="stat-value">95+</span>
+          <span class="stat-label">Google PageSpeed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">&lt; 1s</span>
+          <span class="stat-label">Tempo de Carga</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Mobile-Friendly</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">SSL</span>
+          <span class="stat-label">HTTPS Incluído</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:2mm;">O que está incluído no entregável</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon">✓</div>Código fonte completo</div>
+          <div class="check-item"><div class="check-icon">✓</div>Deploy em produção (Vercel)</div>
+          <div class="check-item"><div class="check-icon">✓</div>Domínio configurado</div>
+          <div class="check-item"><div class="check-icon">✓</div>1 mês de suporte pós-entrega</div>
+          <div class="check-item"><div class="check-icon">✓</div>Formação para editar conteúdos</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:2mm;">Integrações disponíveis</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon">+</div>Formulário ligado a e-mail real</div>
+          <div class="check-item"><div class="check-icon">+</div>Google Analytics / Search Console</div>
+          <div class="check-item"><div class="check-icon">+</div>Pixel Facebook / Meta Ads</div>
+          <div class="check-item"><div class="check-icon">+</div>Google My Business integrado</div>
+          <div class="check-item"><div class="check-icon">+</div>Widget de chat (Tawk, WhatsApp)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Elaris Studio — Template de Restaurante</span>
+    <span class="page-footer-num">5 / 6</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     PÁGINA 6 — PRÓXIMOS PASSOS
+══════════════════════════ -->
+<div class="page">
+  <div class="inner">
+    <div class="page-header">
+      <span class="tag">Como Avançar</span>
+      <h2 class="page-title">Próximos <em>passos</em></h2>
+    </div>
+
+    <div class="highlight" style="margin-bottom:2mm;">
+      <div class="highlight-title">O website pode estar online em 5 dias úteis</div>
+      <div class="highlight-body">Após aprovação e entrega dos conteúdos (textos, logótipo, fotografias e ementa), a personalização completa e o lançamento são feitos em menos de uma semana. Não é necessário qualquer conhecimento técnico da parte do cliente.</div>
+    </div>
+
+    <div style="font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); margin-bottom:3mm;">Linha de tempo</div>
+    <div style="position:relative; padding-left:6mm;">
+      <div style="position:absolute; left:2mm; top:0; bottom:0; width:1px; background:rgba(255,255,255,0.08);"></div>
+
+      <div style="margin-bottom:5mm; padding-left:5mm; position:relative;">
+        <div style="position:absolute; left:-4mm; top:3px; width:8px; height:8px; border-radius:50%; background:var(--orange);"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--white); margin-bottom:1mm;">Dia 1 — Reunião de briefing</div>
+        <div style="font-size:10px; font-weight:300; color:var(--muted); line-height:1.6;">Levantamento de conteúdos: textos, fotografias, ementa, cores e preferências do cliente.</div>
+      </div>
+
+      <div style="margin-bottom:5mm; padding-left:5mm; position:relative;">
+        <div style="position:absolute; left:-4mm; top:3px; width:8px; height:8px; border-radius:50%; background:rgba(234,88,12,0.5); border:1px solid var(--orange);"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--white); margin-bottom:1mm;">Dias 2–3 — Personalização</div>
+        <div style="font-size:10px; font-weight:300; color:var(--muted); line-height:1.6;">Aplicação do logótipo, cores, textos reais, ementa completa e fotografias no website.</div>
+      </div>
+
+      <div style="margin-bottom:5mm; padding-left:5mm; position:relative;">
+        <div style="position:absolute; left:-4mm; top:3px; width:8px; height:8px; border-radius:50%; background:rgba(234,88,12,0.3); border:1px solid rgba(234,88,12,0.5);"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--white); margin-bottom:1mm;">Dia 4 — Revisão e aprovação</div>
+        <div style="font-size:10px; font-weight:300; color:var(--muted); line-height:1.6;">Partilha de pré-visualização com o cliente. Ajustes e correções com base no feedback.</div>
+      </div>
+
+      <div style="padding-left:5mm; position:relative;">
+        <div style="position:absolute; left:-4mm; top:3px; width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--white); margin-bottom:1mm;">Dia 5 — Lançamento</div>
+        <div style="font-size:10px; font-weight:300; color:var(--muted); line-height:1.6;">Configuração do domínio, deploy em produção, testes finais em todos os dispositivos.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:2mm;">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:2mm; font-size:13px;">O que precisamos de si</div>
+        <ul class="feat-list">
+          <li>Logótipo em formato PNG ou SVG</li>
+          <li>8 a 12 fotografias do espaço e pratos</li>
+          <li>Ementa completa com preços</li>
+          <li>Textos de apresentação (ou fornecemos nós)</li>
+          <li>Dados de contacto e horários</li>
+        </ul>
+      </div>
+
+      <div class="card" style="background: linear-gradient(135deg, rgba(234,88,12,0.12), rgba(234,88,12,0.04)); border-color:rgba(234,88,12,0.3); display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div class="card-title" style="font-size:13px; margin-bottom:2mm;">Pronto para avançar?</div>
+          <div class="card-body" style="margin-bottom:4mm;">Fale connosco e receba um orçamento personalizado para o seu restaurante.</div>
+        </div>
+        <div>
+          <div style="font-size:9px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:rgba(250,250,249,0.3); margin-bottom:1mm;">Contacto</div>
+          <div style="font-size:12px; color:var(--white); font-weight:500;">elarisstudio@gmail.com</div>
+          <div style="font-size:12px; color:var(--white); font-weight:500; margin-top:1mm;">+351 9xx xxx xxx</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="page-footer-brand">Elaris Studio — Template de Restaurante</span>
+    <span class="page-footer-num">6 / 6</span>
+  </div>
+</div>
+
+</body>
+</html>

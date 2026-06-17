@@ -9,10 +9,8 @@ import Image from "next/image";
 /* ─── EYEBROW ───────────────────────────────────────────── */
 function Eyebrow({ label, center = false }: { label: string; center?: boolean }) {
   return (
-    <div className={`flex items-center gap-3 ${center ? 'justify-center' : ''}`}>
-      <div className="w-6 h-px bg-brand-500 shrink-0" />
+    <div className={`flex items-center ${center ? 'justify-center' : ''}`}>
       <span className="text-brand-500 text-[10px] uppercase tracking-[0.42em] font-medium">{label}</span>
-      {center && <div className="w-6 h-px bg-brand-500 shrink-0" />}
     </div>
   );
 }
@@ -25,7 +23,7 @@ export default function HomePage() {
       <main className="flex-1">
         <HeroSection />
         <QuemSomosSection />
-        <CarneSection />
+        <DiferenciadoresSection />
         <EspecialidadesSection />
         <RestauranteSection />
         <ReservarSection />
@@ -48,7 +46,7 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <Eyebrow label="Churrascaria · Rio Tinto · Desde 2009" />
+            <Eyebrow label="Tipo de negócio · Localização · Desde [ano]" />
           </motion.div>
 
           <motion.h1
@@ -57,9 +55,9 @@ function HeroSection() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="font-serif text-[clamp(3rem,8vw,6.5rem)] text-white leading-[1.05] tracking-tight"
           >
-            Sal, Brasa<br />
-            e o Dom de<br />
-            <span className="text-brand-500 italic">Servir Bem</span>
+            Slogan<br />
+            Principal do<br />
+            <span className="text-brand-500 italic">Restaurante</span>
           </motion.h1>
 
           <motion.p
@@ -68,7 +66,7 @@ function HeroSection() {
             transition={{ duration: 0.8, delay: 0.38 }}
             className="text-white/50 text-lg font-light leading-relaxed max-w-md"
           >
-            Há 15 anos que transformamos o melhor da carne portuguesa numa experiência que nunca se esquece. Bem-vindo ao Brasinhas 3.
+            Descrição breve do conceito e proposta de valor do restaurante. O que o torna único e porque vale a pena visitar.
           </motion.p>
 
           <motion.div
@@ -86,7 +84,7 @@ function HeroSection() {
               Reservar Mesa
             </motion.a>
             <motion.a
-              href="#especialidades"
+              href="/ementa"
               whileHover={{ scale: 1.04 }}
               className="border border-white/18 text-white/75 text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full hover:border-white/35 hover:text-white transition-all"
             >
@@ -105,7 +103,7 @@ function HeroSection() {
           <div className="absolute inset-[-20px] bg-brand-600/12 blur-3xl rounded-[3rem] pointer-events-none" />
           <Image
             src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900"
-            alt="Churrasco O Brasinhas 3"
+            alt="Imagem principal do restaurante"
             fill
             sizes="480px"
             className="object-cover"
@@ -133,7 +131,7 @@ function QuemSomosSection() {
         >
           <Image
             src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900"
-            alt="Interior O Brasinhas 3"
+            alt="Fotografia do interior do restaurante"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover brightness-[0.65]"
@@ -141,10 +139,10 @@ function QuemSomosSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-stone-950/55 to-transparent" />
           <div className="absolute bottom-8 left-8 right-8 border-l-2 border-brand-500 pl-5 py-1">
             <p className="text-white/80 font-serif italic text-lg leading-relaxed">
-              &ldquo;Cada cliente é recebido como família.&rdquo;
+              &ldquo;Citação ou frase de impacto que representa os valores do restaurante.&rdquo;
             </p>
             <span className="text-brand-500 text-[10px] uppercase tracking-widest font-medium mt-2 block">
-              — A Equipa, O Brasinhas 3
+              — Assinatura da citação
             </span>
           </div>
         </motion.div>
@@ -158,22 +156,22 @@ function QuemSomosSection() {
         >
           <Eyebrow label="A Nossa História" />
           <h2 className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] text-white leading-[1.1]">
-            Do Fogo à Mesa,<br />com Paixão
+            Título sobre a origem<br />e identidade
           </h2>
           <div className="space-y-4 text-white/55 text-base font-light leading-relaxed">
             <p>
-              Fundado em 2009, O Brasinhas 3 nasceu de uma paixão genuína pela churrascaria e pela gastronomia portuguesa. Situado no coração de Rio Tinto, tornámo-nos a referência para quem procura qualidade, sabor e um ambiente acolhedor.
+              Parágrafo sobre a origem e história do restaurante — quando foi fundado, onde fica e o que o distingue da concorrência. Transmitir autenticidade e paixão pelo negócio.
             </p>
             <p>
-              Trabalhamos apenas com produtores criteriosamente selecionados, que partilham o nosso compromisso com a excelência da matéria-prima. Acreditamos que a qualidade começa muito antes da brasa — começa na escolha.
+              Parágrafo sobre os valores do restaurante: compromisso com a qualidade dos ingredientes, forma de trabalhar com fornecedores e a filosofia que guia cada prato servido.
             </p>
           </div>
 
           <div className="flex items-center gap-8 pt-4 border-t border-white/[0.06]">
             {[
-              { val: '15+', label: 'Anos' },
-              { val: '4.1★', label: 'Google' },
-              { val: '1800+', label: 'Clientes' },
+              { val: '[Nº]+', label: 'Anos' },
+              { val: '[Nº]★', label: 'Google' },
+              { val: '[Nº]+', label: 'Clientes' },
             ].map((s, i) => (
               <div key={s.label} className={`space-y-1 ${i > 0 ? 'pl-8 border-l border-white/[0.06]' : ''}`}>
                 <p className="font-serif text-2xl text-white">{s.val}</p>
@@ -187,23 +185,23 @@ function QuemSomosSection() {
   );
 }
 
-/* ─── CARNE ─────────────────────────────────────────────── */
-function CarneSection() {
+/* ─── DIFERENCIADOES ────────────────────────────────────── */
+function DiferenciadoresSection() {
   const pilares = [
     {
       num: '01',
-      title: 'Origem Certificada',
-      desc: 'Trabalhamos diretamente com produtores criteriosamente selecionados, garantindo rastreabilidade total e respeito pelo bem-estar animal.',
+      title: 'Nome do 1.º diferenciador',
+      desc: 'Descrição do primeiro ponto que distingue o restaurante — qualidade dos ingredientes, origem, processo de produção ou certificação.',
     },
     {
       num: '02',
-      title: 'Maturação Controlada',
-      desc: 'Os nossos cortes passam pelo processo de maturação ideal para atingir a ternura e intensidade de sabor que nos caracteriza.',
+      title: 'Nome do 2.º diferenciador',
+      desc: 'Descrição do segundo ponto diferenciador — técnica de confeção, tempo de preparação, método exclusivo ou tradição da casa.',
     },
     {
       num: '03',
-      title: 'Brasa Artesanal',
-      desc: 'A brasa é a nossa tela. Cada peça é cozinhada com a temperatura certa e o timing perfeito — sem pressa, sem atalhos.',
+      title: 'Nome do 3.º diferenciador',
+      desc: 'Descrição do terceiro ponto diferenciador — experiência de serviço, ambiente, personalização ou qualquer outro elemento de valor.',
     },
   ];
 
@@ -211,7 +209,6 @@ function CarneSection() {
     <section id="carne" className="py-32 px-6 md:px-12">
       <div className="max-w-7xl mx-auto space-y-20">
 
-        {/* Two-col: sticky title + numbered list */}
         <div className="grid lg:grid-cols-2 gap-16 xl:gap-28 items-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -219,13 +216,13 @@ function CarneSection() {
             viewport={{ once: true }}
             className="space-y-7 lg:sticky lg:top-36"
           >
-            <Eyebrow label="A Nossa Carne" />
+            <Eyebrow label="Categoria principal do menu" />
             <h2 className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] text-white leading-[1.1]">
-              Seleção Rigorosa,<br />
-              <span className="text-white/28 italic">Sabor Inigualável</span>
+              Título sobre o produto<br />
+              <span className="text-white/28 italic">ou especialidade</span>
             </h2>
             <p className="text-white/50 text-base font-light leading-relaxed">
-              O segredo de um bom churrasco começa muito antes da brasa. Começa na escolha. Trabalhamos com produtores que partilham os nossos valores de excelência e rigor, para que cada corte que chega à sua mesa seja simplesmente perfeito.
+              Parágrafo introdutório sobre o que torna o produto principal do restaurante especial. Explicar a filosofia por detrás da escolha dos ingredientes e da forma como são trabalhados.
             </p>
           </motion.div>
 
@@ -262,7 +259,7 @@ function CarneSection() {
         >
           <Image
             src="https://images.unsplash.com/photo-1603048297172-c92544798d5a?q=80&w=1400"
-            alt="Cortes de carne O Brasinhas 3"
+            alt="Fotografia do produto ou prato principal"
             fill
             sizes="(max-width: 1280px) 100vw, 1280px"
             className="object-cover brightness-[0.6]"
@@ -270,7 +267,7 @@ function CarneSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-stone-950/30 to-transparent" />
           <div className="absolute inset-0 flex items-end p-10 md:p-14">
             <p className="font-serif text-white/75 italic text-xl md:text-2xl max-w-sm leading-relaxed">
-              &ldquo;A qualidade não se improvisa. Escolhemos com rigor para que cada garfada valha a pena.&rdquo;
+              &ldquo;Citação de impacto sobre a qualidade ou filosofia do restaurante.&rdquo;
             </p>
           </div>
         </motion.div>
@@ -283,21 +280,21 @@ function CarneSection() {
 function EspecialidadesSection() {
   const pratos = [
     {
-      title: 'Francesinha Especial',
-      desc: 'Molho secreto da casa, queijo derretido e batata frita caseira.',
-      price: '12.50€',
+      title: 'Nome do prato 1',
+      desc: 'Descrição breve dos ingredientes, modo de confeção e acompanhamentos do primeiro prato de destaque.',
+      price: '00.00€',
       img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=900',
     },
     {
-      title: 'Picanha à Brasinhas',
-      desc: 'Corte premium grelhado na brasa com arroz, feijão e farofa.',
-      price: '18.50€',
+      title: 'Nome do prato 2',
+      desc: 'Descrição breve dos ingredientes, modo de confeção e acompanhamentos do segundo prato de destaque.',
+      price: '00.00€',
       img: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=900',
     },
     {
-      title: 'Costeletão de Novilho',
-      desc: 'Novilho em brasa controlada com alecrim, alho e batatas assadas.',
-      price: '28.00€',
+      title: 'Nome do prato 3',
+      desc: 'Descrição breve dos ingredientes, modo de confeção e acompanhamentos do terceiro prato de destaque.',
+      price: '00.00€',
       img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900',
     },
   ];
@@ -310,14 +307,14 @@ function EspecialidadesSection() {
           <div className="space-y-4">
             <Eyebrow label="Especialidades" />
             <h2 className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] text-white">
-              A Nossa Ementa
+              Destaques da Ementa
             </h2>
           </div>
           <a
-            href="/reservar"
+            href="/ementa"
             className="text-brand-500 text-[11px] uppercase tracking-widest flex items-center gap-2 group mb-1"
           >
-            Reservar Mesa
+            Ver Ementa Completa
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
@@ -370,7 +367,7 @@ function RestauranteSection() {
         >
           <Image
             src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1400"
-            alt="Restaurante O Brasinhas 3"
+            alt="Fotografia do espaço do restaurante"
             fill
             sizes="(max-width: 1280px) 100vw, 1280px"
             className="object-cover brightness-[0.5]"
@@ -379,10 +376,10 @@ function RestauranteSection() {
           <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-16 space-y-6 max-w-2xl">
             <Eyebrow label="O Restaurante" />
             <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] text-white leading-[1.1]">
-              Um Espaço para Saborear,<br />Partilhar e Voltar
+              Título sobre o espaço<br />e a experiência
             </h2>
             <p className="text-white/55 font-light leading-relaxed text-base max-w-md">
-              Mais do que um restaurante, somos um ponto de encontro. Onde o serviço é personalizado, o ambiente é acolhedor e cada visita se transforma numa memória.
+              Descrição do ambiente do restaurante — decoração, capacidade, tipo de serviço e o que torna cada visita numa experiência memorável para o cliente.
             </p>
             <motion.a
               href="/reservar"
@@ -412,13 +409,12 @@ function ReservarSection() {
       >
         <Eyebrow label="Reservas" center />
         <h2 className="font-serif text-[clamp(2.2rem,5vw,4rem)] text-white">
-          Reserve a Sua Mesa
+          Título call-to-action<br />de reserva
         </h2>
         <p className="text-white/42 font-light leading-relaxed">
-          Garanta o seu lugar e prepare-se para uma experiência que vai querer repetir.
-          Todos os dias, das 12:00 às 22:30.
+          Texto motivacional para o utilizador fazer a reserva. Horário de funcionamento e disponibilidade. Ex: todos os dias, das 00:00 às 00:00.
         </p>
-        <p className="font-serif text-white text-4xl tracking-wide">916 233 375</p>
+        <p className="font-serif text-white text-4xl tracking-wide">[Número de telefone]</p>
         <div className="flex flex-wrap gap-4 justify-center pt-2">
           <motion.a
             href="/reservar"
@@ -429,7 +425,7 @@ function ReservarSection() {
             Reservar Online
           </motion.a>
           <a
-            href="tel:916233375"
+            href="tel:000000000"
             className="border border-white/18 text-white/65 hover:text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full transition-colors hover:border-white/35"
           >
             Ligar Agora

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { FireBackground } from "@/components/ui/FireBackground";
+import { BackToTop } from "@/components/ui/BackToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
         <main id="main-content" className="flex-1 z-10 flex flex-col">
           {children}
         </main>
+        <BackToTop />
       </body>
     </html>
   );

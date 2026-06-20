@@ -79,14 +79,14 @@ function HeroSection() {
               href="/reservar"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-brand-600 text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full shadow-[0_8px_32px_rgba(234,88,12,0.35)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.45)] transition-shadow"
+              className="bg-brand-600 text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full shadow-[0_8px_32px_rgba(234,88,12,0.35)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.45)] transition-shadow cursor-pointer"
             >
               Reservar Mesa
             </motion.a>
             <motion.a
               href="/ementa"
               whileHover={{ scale: 1.04 }}
-              className="border border-white/18 text-white/75 text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full hover:border-white/35 hover:text-white transition-all"
+              className="border border-white/18 text-white/75 text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full hover:border-white/35 hover:text-white transition-all cursor-pointer"
             >
               Ver Ementa
             </motion.a>
@@ -142,7 +142,7 @@ function QuemSomosSection() {
               &ldquo;Citação ou frase de impacto que representa os valores do restaurante.&rdquo;
             </p>
             <span className="text-brand-500 text-[10px] uppercase tracking-widest font-medium mt-2 block">
-              — Assinatura da citação
+              Assinatura da citação
             </span>
           </div>
         </motion.div>
@@ -160,7 +160,7 @@ function QuemSomosSection() {
           </h2>
           <div className="space-y-4 text-white/55 text-base font-light leading-relaxed">
             <p>
-              Parágrafo sobre a origem e história do restaurante — quando foi fundado, onde fica e o que o distingue da concorrência. Transmitir autenticidade e paixão pelo negócio.
+              Parágrafo sobre a origem e história do restaurante, quando foi fundado, onde fica e o que o distingue da concorrência. Transmitir autenticidade e paixão pelo negócio.
             </p>
             <p>
               Parágrafo sobre os valores do restaurante: compromisso com a qualidade dos ingredientes, forma de trabalhar com fornecedores e a filosofia que guia cada prato servido.
@@ -191,17 +191,17 @@ function DiferenciadoresSection() {
     {
       num: '01',
       title: 'Nome do 1.º diferenciador',
-      desc: 'Descrição do primeiro ponto que distingue o restaurante — qualidade dos ingredientes, origem, processo de produção ou certificação.',
+      desc: 'Descrição do primeiro ponto que distingue o restaurante: qualidade dos ingredientes, origem, processo de produção ou certificação.',
     },
     {
       num: '02',
       title: 'Nome do 2.º diferenciador',
-      desc: 'Descrição do segundo ponto diferenciador — técnica de confeção, tempo de preparação, método exclusivo ou tradição da casa.',
+      desc: 'Descrição do segundo ponto diferenciador: técnica de confeção, tempo de preparação, método exclusivo ou tradição da casa.',
     },
     {
       num: '03',
       title: 'Nome do 3.º diferenciador',
-      desc: 'Descrição do terceiro ponto diferenciador — experiência de serviço, ambiente, personalização ou qualquer outro elemento de valor.',
+      desc: 'Descrição do terceiro ponto diferenciador: experiência de serviço, ambiente, personalização ou qualquer outro elemento de valor.',
     },
   ];
 
@@ -312,7 +312,7 @@ function EspecialidadesSection() {
           </div>
           <a
             href="/ementa"
-            className="text-brand-500 text-[11px] uppercase tracking-widest flex items-center gap-2 group mb-1"
+            className="text-brand-500 text-[11px] uppercase tracking-widest flex items-center gap-2 group mb-1 cursor-pointer"
           >
             Ver Ementa Completa
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -379,12 +379,12 @@ function RestauranteSection() {
               Título sobre o espaço<br />e a experiência
             </h2>
             <p className="text-white/55 font-light leading-relaxed text-base max-w-md">
-              Descrição do ambiente do restaurante — decoração, capacidade, tipo de serviço e o que torna cada visita numa experiência memorável para o cliente.
+              Descrição do ambiente do restaurante: decoração, capacidade, tipo de serviço e o que torna cada visita numa experiência memorável para o cliente.
             </p>
             <motion.a
               href="/reservar"
               whileHover={{ scale: 1.03 }}
-              className="inline-flex items-center gap-2 text-brand-500 text-[11px] uppercase tracking-widest font-medium group w-fit"
+              className="inline-flex items-center gap-2 text-brand-500 text-[11px] uppercase tracking-widest font-medium group w-fit cursor-pointer"
             >
               Reservar Mesa
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -420,13 +420,13 @@ function ReservarSection() {
             href="/reservar"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="bg-brand-600 text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full shadow-[0_8px_32px_rgba(234,88,12,0.3)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.4)] transition-shadow"
+            className="bg-brand-600 text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full shadow-[0_8px_32px_rgba(234,88,12,0.3)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.4)] transition-shadow cursor-pointer"
           >
             Reservar Online
           </motion.a>
           <a
             href="tel:000000000"
-            className="border border-white/18 text-white/65 hover:text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full transition-colors hover:border-white/35"
+            className="border border-white/18 text-white/65 hover:text-white text-[11px] uppercase tracking-widest font-sans py-5 px-12 rounded-full transition-colors hover:border-white/35 cursor-pointer"
           >
             Ligar Agora
           </a>

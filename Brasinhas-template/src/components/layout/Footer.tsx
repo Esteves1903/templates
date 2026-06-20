@@ -19,7 +19,7 @@ export function Footer() {
               className="object-contain object-contain"
             />
             <p className="text-white/35 text-sm font-light leading-relaxed max-w-[200px]">
-              A churrascaria de referência em Rio Tinto, desde 2009.
+              O restaurante de referência na sua cidade, com anos de tradição e sabor autêntico.
             </p>
           </div>
 
@@ -36,7 +36,7 @@ export function Footer() {
               href="https://www.google.com/maps/search/?api=1&query=R.+Fernão+de+Magalhães+89+Rio+Tinto"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-brand-500 text-[10px] uppercase tracking-widest font-medium group"
+              className="inline-flex items-center gap-2 text-brand-500 text-[10px] uppercase tracking-widest font-medium group cursor-pointer"
             >
               Ver no Mapa
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
@@ -61,21 +61,21 @@ export function Footer() {
             </h3>
             <div className="space-y-1.5 text-sm font-light">
               <a
-                href="tel:916233375"
-                className="block text-white/50 hover:text-white transition-colors"
+                href="tel:9XXXXXXXX"
+                className="block text-white/50 hover:text-white transition-colors cursor-pointer"
               >
-                916 233 375
+                9XX XXX XXX
               </a>
               <a
-                href="mailto:reservas@obrasinhas.pt"
-                className="block text-white/50 hover:text-white transition-colors"
+                href="mailto:reservas@exemplo.pt"
+                className="block text-white/50 hover:text-white transition-colors cursor-pointer"
               >
-                reservas@obrasinhas.pt
+                reservas@exemplo.pt
               </a>
             </div>
             <a
               href="/reservar"
-              className="inline-flex items-center gap-2 text-brand-500 text-[10px] uppercase tracking-widest font-medium group"
+              className="inline-flex items-center gap-2 text-brand-500 text-[10px] uppercase tracking-widest font-medium group cursor-pointer"
             >
               Reservar Mesa
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />

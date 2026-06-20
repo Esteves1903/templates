@@ -200,7 +200,7 @@ export default function EmentaPage() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-white/50 text-lg font-light max-w-lg leading-relaxed"
             >
-              Descrição breve da ementa — o que a torna especial, a filosofia por detrás dos pratos ou a origem dos ingredientes.
+              Descrição breve da ementa: o que a torna especial, a filosofia por detrás dos pratos ou a origem dos ingredientes.
             </motion.p>
           </div>
         </section>
